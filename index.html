@@ -474,11 +474,10 @@ function rulesHTML(){
   <div class="grid3" style="grid-template-columns:repeat(4,1fr)">${c.map((x,i)=>`<div class="card stat" style="--tc:var(${x[3]});animation:rise .7s ${.1+i*.08}s var(--ease) both;padding:34px 20px"><b>${x[0]}</b><span>${x[1]}</span><small>${x[2]}</small></div>`).join('')}</div></div>`;
 }
 function shadowHTML(){
-  const r=[['Во время пауз','можно задать <span>один вопрос</span> командам. Напишите его на карточке и опустите в шкатулку.'],['Команда ответила верно','— она получает <span>1 очко.</span>'],['Не справилась','— <span>1 очко получаете вы,</span> автор вопроса, и сами решаете, какой команде его подарить.'],['Вопрос из зала не прозвучал?','Тогда его <span>озвучит ведущий.</span>']];
+  const r=[['В начале игры','пять зрителей пишут свои вопросы на листочках и опускают их в шкатулку.'],['Во время пауз','ведущий достаёт <span>случайный вопрос</span> из шкатулки и зачитывает его командам.'],['Команда ответила верно','— она получает <span>1 очко.</span>'],['Не справилась','— <span>1 очко получает автор вопроса,</span> и он сам решает, какой команде его подарить.']];
   return `<div style="display:flex;gap:56px;align-items:center;height:100%"><div style="width:440px;text-align:center"><div class="tbadge wob" style="margin:0 auto;--theme:#FF6F91">${line('casket',2)}</div><div style="font-size:36px;margin-top:26px;color:var(--pink);font-weight:900">Шкатулка с вопросами</div></div>
   <div style="flex:1"><div class="kicker">Зрители тоже играют</div><h2 class="t" style="margin:6px 0 20px;font-size:56px">Зрители тоже могут участвовать в игре!</h2>
-  ${r.map((x,i)=>`<div class="card li" style="margin-bottom:12px;padding:16px 30px;animation:rise .7s ${.15+i*.1}s var(--ease) both"><b style="font-size:40px">${i+1}</b><p style="font-size:27px"><strong>${x[0]}</strong> ${x[1]}</p></div>`).join('')}
-  <p style="margin-top:4px;color:var(--muted);font-size:22px;font-weight:700">Нет своего вопроса? Возьмите из второй шкатулки и укажите своё имя.</p></div></div>`;
+  ${r.map((x,i)=>`<div class="card li" style="margin-bottom:12px;padding:16px 30px;animation:rise .7s ${.15+i*.1}s var(--ease) both"><b style="font-size:40px">${i+1}</b><p style="font-size:27px"><strong>${x[0]}</strong> ${x[1]}</p></div>`).join('')}</div></div>`;
 }
 function warmupHTML(){
   return `<div class="center" style="justify-content:flex-start;padding-top:6px"><div class="kicker">Разминка</div><h2 class="t" style="margin:6px 0 30px;font-size:84px">Отвечаем хором!</h2>
@@ -497,8 +496,8 @@ function qHTML2(st){
    <div class="side">${timerHTML()}<div class="status" id="status"></div></div></div>`;
 }
 function pauseHTML(st){
-  return `<div style="display:flex;gap:64px;align-items:center;height:100%"><div style="flex:1"><div class="kicker">Перерыв №${st.k} · вопрос из зала</div><h2 class="t" style="margin:4px 0 22px;font-size:92px">Пауза</h2>
-  <div class="card li"><b>1</b><p>Зритель задаёт свой вопрос — затем нажмите <span>«Старт»</span></p></div>
+  return `<div style="display:flex;gap:64px;align-items:center;height:100%"><div style="flex:1"><div class="kicker">Перерыв №${st.k} · вопрос из шкатулки</div><h2 class="t" style="margin:4px 0 22px;font-size:92px">Пауза</h2>
+  <div class="card li"><b>1</b><p>Ведущий зачитывает случайный вопрос из шкатулки — затем нажмите <span>«Старт»</span></p></div>
   <div class="card li"><b>2</b><p>Время вышло — команды отвечают, ответ называют в зале. <span>Верно — очко команде</span> (нажмите на неё внизу)</p></div>
   <div class="card li"><b>3</b><p>Не справились — <span>очко автору,</span> он дарит его любой команде</p></div></div>
   <div class="side" style="width:400px;gap:20px">${timerHTML()}<div class="status" id="status"></div></div></div>`;
@@ -563,7 +562,7 @@ function paintHint(){
     if(T.left<=0){t='Время вышло — команды отвечают, ведущий выдаёт очко';stt='Время вышло!'}
     else if(T.running){t='Команды думают…';stt='Команды думают…'}
     else if(T.left<T.dur){t='Таймер на паузе';stt='Пауза'}
-    else{t='Зритель задаёт вопрос — затем нажмите «Старт»';stt='Ждём вопрос из зала…'}
+    else{t='Ведущий читает вопрос из шкатулки — затем нажмите «Старт»';stt='Ждём вопрос из шкатулки…'}
   }
   else if(st.t==='ablitz')t=T.left<=0?'Время вышло — неотвеченные ответы показаны красным':'Верный ответ зрителя — нажмите на команду-получателя';
   else if(st.t==='warmup')t='Отвечаем хором — очки не начисляются';
